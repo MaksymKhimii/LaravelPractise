@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,12 @@ Route::get('hello', function () {
 });
 
 Route::get('users', function () {
-    return view('users', ['users'=>App\Models\User::all()]);
+    $users = DB::table('users')->get();
+    return view('users', compact('users'));
+});
+
+Route::get('user/{id}', function ($id) {
+    $user = DB::table('users')->find($id);
+    return view('user', compact('user'));
 });
 
