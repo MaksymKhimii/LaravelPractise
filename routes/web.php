@@ -28,3 +28,7 @@ Route::get('hello', function () {
     return view('hello', compact('actions'));
 });
 
+Route::get('users', function () {
+    return view('users', ['users'=>App\Models\User::all()]);
+});
+
