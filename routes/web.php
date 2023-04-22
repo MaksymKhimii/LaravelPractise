@@ -5,6 +5,7 @@ use \App\Models\Flight;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,10 +116,27 @@ Route::get('/delete', function () {
 });*/
 
 //One-to-One relationship
-Route::get('/user/{id}/post', function ($id){
+Route::get('/user/{id}/post', function ($id) {
     return User::find($id)->post->title;
 });
 
-Route::get('/post/{id}/user', function ($id){
+//One-to-One inverse relationship
+Route::get('/post/{id}/user', function ($id) {
     return Post::find($id)->user->name;
+});
+
+// One-to-Many relationship
+Route::get('/posts', function () {
+    $user = User::find(1);
+    foreach ($user->posts as $post) {
+        echo $post->id . ' ' . $post->title . ' ' . $post->content . "<br>";
+    }
+});
+
+// polymorphic relationship
+Route::get('/users/photos', function () {
+    $user = User::find(1);
+    foreach ($user->photos as $photo) {
+        return $photo;
+    }
 });
