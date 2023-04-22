@@ -116,5 +116,9 @@ Route::get('/delete', function () {
 
 //One-to-One relationship
 Route::get('/user/{id}/post', function ($id){
-    return User::find(1)->post->title;
+    return User::find($id)->post->title;
+});
+
+Route::get('/post/{id}/user', function ($id){
+    return Post::find($id)->user->name;
 });
