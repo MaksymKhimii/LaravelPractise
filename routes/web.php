@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Post;
+use \App\Models\Flight;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +43,7 @@ Route::get('user/{id}', function ($id) {
 
 //Route::get('/post/{id}', '\App\Http\Controllers\PostsController@index');
 
-Route::resource('posts', '\App\Http\Controllers\PostsController');
+/*Route::resource('posts', '\App\Http\Controllers\PostsController');
 
 Route::get('/insert', function () {
     DB::insert('insert into users(phone, created_at, updated_at) VALUES
@@ -62,4 +64,57 @@ Route::get('/update', function (){
 Route::get('/delete', function (){
     $delete = DB::delete('delete from users where id = ?', [1]);
     return $delete;
+});*/
+
+/*Route::get('/read', function () {
+    $posts = Post::all();
+    foreach ($posts as $post) {
+        return $post->title;
+    }
+});
+
+Route::get('/find', function () {
+    $post = DB::table('posts')->find(1);
+    return $post->title;
+});
+
+Route::get('/findWhere', function () {
+    $post = DB::table('posts')
+        ->orderBy('id', 'desc')
+        ->take(2)
+        ->get();
+    return $post;
+});
+
+Route::get('/findmore', function () {
+    $post = Post::all();
+    return $post;
+});
+
+Route::get('/flights', function () {
+    return \App\Models\Flight::all()->where('name', '=', 'Java');
+});
+
+Route::get('/insert', function () {
+    $flight = Flight::all()->find(1);
+    $flight->name = 'C++';
+    $flight->save();
+});
+
+Route::get('/create', function () {
+    /*$flights = Flight::all()->orderBy('id', 'desc');*/
+/*    $flights = Flight::all()->sortByDesc('id')->first();
+    Flight::create(array('name'=>'GO'));
+
+});
+
+Route::get('/delete', function () {
+    $flights = Flight::all()->where('name', '=', 'C++')->first();
+    $flights->delete();
+
+});*/
+
+//One-to-One relationship
+Route::get('/user/{id}/post', function ($id){
+    return User::find(1)->post->title;
 });
