@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use App\Models\Post;
 use \App\Models\Flight;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +117,7 @@ Route::get('/delete', function () {
 });*/
 
 //One-to-One relationship
-Route::get('/user/{id}/post', function ($id) {
+/*Route::get('/user/{id}/post', function ($id) {
     return User::find($id)->post->title;
 });
 
@@ -139,4 +140,6 @@ Route::get('/users/photos', function () {
     foreach ($user->photos as $photo) {
         return $photo;
     }
-});
+});*/
+
+Route::resource('/posts', PostsController::class);
